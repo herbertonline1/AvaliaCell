@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AvaliaCell Pro — Avaliação e Compra de Celulares para Revenda (2026)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col pb-24 md:pb-6">
+
+  <!-- Cabeçalho Exclusivo para Impressão A4 -->
+  <div class="print-only border-b-2 border-slate-900 pb-3 mb-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-sky-700">AvaliaCell Pro • Guia de Inspeção & Precificação (2026)</p>
+        <h1 id="printDocTitle" class="text-lg font-extrabold text-slate-900">Ficha de Avaliação Técnica de Celular</h1>
+      </div>
+      <div class="text-right text-[10px] text-slate-600">
+        <p>Consulta IMEI: <strong>consulta.anatel.gov.br</strong></p>
+        <p>Data: ____/____/2026 • IMEI: ______________________</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Principal Fixo (Desktop & Mobile) -->
+  <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md no-print">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-500 flex items-center justify-center font-extrabold text-slate-950 text-base sm:text-lg shadow shrink-0">
+          AC
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight truncate">AvaliaCell Pro</h1>
+            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">2026 • Editável</span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-slate-300 truncate">Avaliação, Garimpo Regional & Inspeção</p>
+        </div>
+      </div>
+
+      <!-- Menu de Navegação Desktop/Tablet -->
+      <nav class="hidden md:flex items-center gap-1.5 bg-slate-800/80 p-1 rounded-xl border border-slate-700/80">
+        <button id="btnTabAvaliador" type="button" onclick="switchTab('avaliador')" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm transition">
+          Avaliador & Lojas
+        </button>
+        <button type="button" onclick="irParaSecao('secChecklist')" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-slate-700/70 transition">
+          Checklist Técnico
+        </button>
+        <button id="btnTabGuia" type="button" onclick="switchTab('guia')" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-slate-700/70 transition">
+          Tabela Geral
+        </button>
+      </nav>
+
+      <!-- Ações Rápidas -->
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="https://www.gov.br/anatel/pt-br/assuntos/celular-legal/consulte-sua-situacao" target="_blank" rel="noopener noreferrer" class="touch-btn px-2.5 sm:px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span class="hidden sm:inline">IMEI Anatel</span>
+          <span class="sm:hidden">Anatel</span>
+        </a>
+        <button type="button" onclick="imprimirFichaAtual()" class="hidden sm:flex px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span>Imprimir Ficha</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Barra de Navegação Inferior Fixa para Celulares -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-900 border-t border-slate-800 text-slate-300 no-print shadow-2xl">
+    <div class="grid grid-cols-5 h-16">
+      <button id="mobNavAvaliar" type="button" onclick="switchTab('avaliador'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-sky-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        <span>Avaliar</span>
+      </button>
+      <button id="mobNavLojas" type="button" onclick="irParaSecao('secLojas')" class="flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span>Lojas</span>
+      </button>
+      <button id="mobNavChecklist" type="button" onclick="irParaSecao('secChecklist')" class="flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        <span>Checklist</span>
+      </button>
+      <button id="mobNavTabela" type="button" onclick="switchTab('guia'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        <span>Tabela</span>
+      </button>
+      <button type="button" onclick="imprimirFichaAtual()" class="flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold text-emerald-400 hover:text-emerald-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        <span>Imprimir</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6">
+
+    <!-- ========================================================= -->
+    <!-- ABA 1: AVALIADOR INTERATIVO                               -->
+    <!-- ========================================================= -->
+    <div id="viewAvaliador" class="space-y-5 sm:space-y-6">
+
+      <!-- Passo 1: Seleção de Marca e Modelo + Visualização Frente/Traseira -->
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 card-print">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Passo 1</span>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">Selecione o Aparelho e Confira o Design Original</h2>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="badgeSistema" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+              Sistema: iOS (Apple)
+            </span>
+            <button type="button" onclick="toggleEditorValores()" class="no-print inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition">
+              <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+              Editar Valores
+            </button>
+          </div>
+        </div>
+
+        <!-- Seletores -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div>
+            <label for="selectMarca" class="block text-xs font-semibold text-slate-600 mb-1.5">Marca / Linha</label>
+            <select id="selectMarca" onchange="onMarcaChange()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500">
+              <option value="apple">Apple (iPhone 12 ao 18)</option>
+              <option value="samsung_s">Samsung Galaxy Linha S (S22 ao S26)</option>
+              <option value="samsung_a">Samsung Galaxy Linha A (A34 ao A57)</option>
+              <option value="xiaomi">Xiaomi / Poco / Redmi</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="selectModelo" class="block text-xs font-semibold text-slate-600 mb-1.5">Modelo Exato</label>
+            <select id="selectModelo" onchange="onModeloChange()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500">
+              <!-- Preenchido via JS -->
+            </select>
+          </div>
+
+          <div class="sm:col-span-2 lg:col-span-1">
+            <label for="selectArmazenamento" class="block text-xs font-semibold text-slate-600 mb-1.5">Armazenamento</label>
+            <select id="selectArmazenamento" onchange="recalcular()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500">
+              <option value="0" data-gb="128GB">128 GB (Padrão)</option>
+              <option value="150" data-gb="256GB">256 GB (+R$ 150 na revenda)</option>
+              <option value="300" data-gb="512GB">512 GB / 1 TB (+R$ 300 na revenda)</option>
+              <option value="-150" data-gb="64GB">64 GB (-R$ 150 na revenda)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Painel Colapsável: Editor de Valores do Modelo -->
+        <div id="painelEditorValores" class="hidden mt-4 p-4 rounded-xl bg-sky-50/70 border border-sky-200 space-y-3 no-print">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 class="text-xs font-extrabold uppercase tracking-wide text-sky-900">Personalizar Tabela de Preços — <span id="editModelName">Modelo</span></h3>
+              <p class="text-[11px] text-sky-700">As alterações ficam salvas automaticamente neste navegador e atualizam a calculadora e a impressão.</p>
+            </div>
+            <button type="button" onclick="resetarValoresModelo()" class="self-start sm:self-auto text-xs font-semibold text-rose-600 hover:text-rose-800 underline">
+              Restaurar valores originais
+            </button>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div>
+              <label for="editCompraMin" class="block text-[11px] font-bold text-slate-700 mb-1">Alvo Mínimo (R$)</label>
+              <input type="number" id="editCompraMin" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">
+            </div>
+            <div>
+              <label for="editCompraMax" class="block text-[11px] font-bold text-slate-700 mb-1">Alvo Máximo (R$)</label>
+              <input type="number" id="editCompraMax" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">
+            </div>
+            <div>
+              <label for="editTeto" class="block text-[11px] font-bold text-slate-700 mb-1">Teto Máximo (R$)</label>
+              <input type="number" id="editTeto" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">
+            </div>
+            <div>
+              <label for="editRevendaMin" class="block text-[11px] font-bold text-slate-700 mb-1">Revenda Mín. (R$)</label>
+              <input type="number" id="editRevendaMin" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">
+            </div>
+            <div>
+              <label for="editRevendaMax" class="block text-[11px] font-bold text-slate-700 mb-1">Revenda Máx. (R$)</label>
+              <input type="number" id="editRevendaMax" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">
+            </div>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button type="button" onclick="toggleEditorValores()" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-200/70">Cancelar</button>
+            <button type="button" onclick="salvarValoresModelo()" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-sm">Salvar Novos Valores</button>
+          </div>
+        </div>
+
+        <!-- Cards de Referência de Mercado do Modelo Selecionado -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 mt-5 pt-5 border-t border-slate-100">
+          <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3">
+            <p class="text-[10px] sm:text-[11px] font-semibold text-emerald-800 uppercase">Compra Ideal (Alvo)</p>
+            <p id="refCompraIdeal" class="text-sm sm:text-base font-extrabold text-emerald-700 mt-0.5">R$ 0 – R$ 0</p>
+            <p class="text-[11px] text-emerald-700/80">Margem cheia para girar</p>
+          </div>
+
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-3">
+            <p class="text-[10px] sm:text-[11px] font-semibold text-amber-800 uppercase">Teto Máximo (Impecável)</p>
+            <p id="refTetoCompra" class="text-sm sm:text-base font-extrabold text-amber-700 mt-0.5">R$ 0</p>
+            <p class="text-[11px] text-amber-700/80">Não pague acima disso</p>
+          </div>
+
+          <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-3">
+            <p class="text-[10px] sm:text-[11px] font-semibold text-sky-800 uppercase">Revenda Estimada</p>
+            <p id="refRevenda" class="text-sm sm:text-base font-extrabold text-sky-700 mt-0.5">R$ 0 – R$ 0</p>
+            <p class="text-[11px] text-sky-700/80">Pix ou 12x c/ repasse</p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <p class="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase">Atualizações até</p>
+            <p id="refAtualizacao" class="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">2028</p>
+            <p id="refSistemaVersao" class="text-[11px] text-slate-500">Suporte oficial</p>
+          </div>
+
+          <div class="col-span-2 lg:col-span-1 bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <p class="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase">Liquidez de Mercado</p>
+            <p id="refLiquidez" class="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">Muito Alta</p>
+            <p id="refDicaModelo" class="text-[11px] text-slate-500 truncate">Giro rápido</p>
+          </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- BUSCA DIRETA NAS LOJAS / CLASSIFICADOS POR ESTADO E CIDADE -->
+        <!-- ========================================================= -->
+        <div id="secLojas" class="mt-5 pt-5 border-t border-slate-200 no-print">
+          <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950 text-white rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-sky-500/20 text-sky-300 text-[10px] font-extrabold uppercase tracking-wider border border-sky-400/30">Garimpo Regional</span>
+                  <h3 class="text-sm sm:text-base font-extrabold">Consultar Anúncios nas Lojas e Classificados</h3>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">
+                  Pesquise oportunidades de <strong id="lojaModeloLabel" class="text-white">iPhone 13 128GB</strong> buscando ofertas na faixa alvo de <strong id="lojaAlvoLabel" class="text-emerald-400">R$ 1.050 – R$ 1.150</strong>.
+                </p>
+              </div>
+
+              <!-- Seletor de Estado (UF), Cidade e Ordenação -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full lg:w-auto lg:min-w-[460px]">
+                <div>
+                  <label for="selectEstado" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Estado (UF)</label>
+                  <select id="selectEstado" onchange="onEstadoChange()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <!-- Preenchido via JS (27 UFs) -->
+                  </select>
+                </div>
+
+                <div>
+                  <label for="inputCidade" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Cidade</label>
+                  <input list="listaCidadesLocal" id="inputCidade" value="Recife" placeholder="Digite ou escolha..." onchange="onCidadeChange()" oninput="onCidadeChange()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3 py-2 text-xs font-bold placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                  <datalist id="listaCidadesLocal">
+                    <option value="Recife"></option>
+                  </datalist>
+                </div>
+
+                <div>
+                  <label for="selectOrdenacaoLoja" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Filtro Rápido</label>
+                  <select id="selectOrdenacaoLoja" onchange="atualizarLinksLojas()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <option value="recentes">Mais Recentes (Garimpo)</option>
+                    <option value="menor_preco">Menor Preço</option>
+                    <option value="relevancia">Mais Relevantes</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botões Diretos das Plataformas -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-4">
+              <a id="linkOLX" href="https://pe.olx.com.br/grande-recife/celulares?q=iPhone%2013%20128GB&sf=1" target="_blank" rel="noopener noreferrer" class="touch-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow transition">
+                <div class="min-w-0">
+                  <span class="block text-xs font-extrabold">OLX</span>
+                  <span id="subOLX" class="block text-[10px] text-purple-200 truncate">PE • Recife</span>
+                </div>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+
+              <a id="linkFacebook" href="https://www.facebook.com/marketplace/recife/search/?query=iPhone%2013%20128GB&sortBy=creation_time_descend" target="_blank" rel="noopener noreferrer" class="touch-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow transition">
+                <div class="min-w-0">
+                  <span class="block text-xs font-extrabold">Facebook</span>
+                  <span id="subFacebook" class="block text-[10px] text-blue-200 truncate">Marketplace • Recife</span>
+                </div>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+
+              <a id="linkMercadoLivre" href="https://lista.mercadolivre.com.br/celulares-telefones/celulares-smartphones/usado/iphone-13-128gb" target="_blank" rel="noopener noreferrer" class="touch-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow transition">
+                <div class="min-w-0">
+                  <span class="block text-xs font-extrabold">Mercado Livre</span>
+                  <span class="block text-[10px] text-slate-800 truncate">Usados • Brasil/UF</span>
+                </div>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+
+              <a id="linkEnjoei" href="https://www.enjoei.com.br/s?q=iPhone%2013%20128GB&s=newest" target="_blank" rel="noopener noreferrer" class="touch-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow transition">
+                <div class="min-w-0">
+                  <span class="block text-xs font-extrabold">Enjoei</span>
+                  <span class="block text-[10px] text-rose-200 truncate">Desapego / Ofertas</span>
+                </div>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+
+              <a id="linkGoogle" href="https://www.google.com/search?q=iPhone%2013%20128GB%20usado%20Recife%20PE" target="_blank" rel="noopener noreferrer" class="col-span-2 sm:col-span-1 touch-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs shadow transition border border-slate-600">
+                <div class="min-w-0">
+                  <span class="block text-xs font-extrabold">Google Local</span>
+                  <span id="subGoogle" class="block text-[10px] text-slate-300 truncate">Recife - PE</span>
+                </div>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referência Visual: Frente e Traseira do Aparelho + Foto Real do Anúncio/Inspeção -->
+        <div class="mt-5 pt-5 border-t border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <!-- Diagrama Frente e Traseira -->
+          <div class="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h3 class="text-xs font-extrabold uppercase tracking-wide text-slate-800">Referência Visual — Frente & Traseira Original</h3>
+                <p id="visualDesignDesc" class="text-[11px] text-slate-500">Confira o alinhamento das lentes, sensores e bordas da tela.</p>
+              </div>
+              <span id="visualCameraTag" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700">Câmera Dupla</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 items-center">
+              <!-- Frente -->
+              <div class="flex flex-col items-center bg-white rounded-xl p-3 border border-slate-200/80">
+                <span class="text-[11px] font-bold text-slate-700 mb-2">FRENTE (Tela & Sensores)</span>
+                <div id="svgFrontContainer" class="w-28 h-48 flex items-center justify-center"></div>
+                <p id="visualFrontNote" class="text-[10px] text-center text-slate-500 mt-2 leading-tight">Bordas finas simétricas; sem folga ou vazamento de luz.</p>
+              </div>
+
+              <!-- Traseira -->
+              <div class="flex flex-col items-center bg-white rounded-xl p-3 border border-slate-200/80">
+                <span class="text-[11px] font-bold text-slate-700 mb-2">TRASEIRA (Lentes & Tampa)</span>
+                <div id="svgBackContainer" class="w-28 h-48 flex items-center justify-center"></div>
+                <p id="visualBackNote" class="text-[10px] text-center text-slate-500 mt-2 leading-tight">Aros das câmeras sem poeira interna ou arranhões.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Painel de Consulta Anatel & Anexo de Fotos Reais do Aparelho -->
+          <div class="lg:col-span-5 flex flex-col gap-3">
+            <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3.5">
+              <div>
+                <h4 class="text-xs font-extrabold text-amber-950">Verificação Oficial de Roubo/Perda (IMEI)</h4>
+                <p class="text-[11px] text-amber-800 mt-0.5 leading-relaxed">Digite <strong>*#06#</strong> no aparelho e consulte imediatamente no portal oficial da Anatel antes de transferir o Pix.</p>
+              </div>
+              <div class="mt-2.5 flex flex-wrap items-center gap-2 no-print">
+                <a href="https://www.gov.br/anatel/pt-br/assuntos/celular-legal/consulte-sua-situacao" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold shadow-sm transition">
+                  Abrir Consulta Anatel Gov.br
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+                <span class="text-[10px] text-amber-800 font-medium">consulta.anatel.gov.br</span>
+              </div>
+            </div>
+
+            <!-- Upload Opcional de Fotos Reais -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-800">Fotos do Aparelho Avaliado (Opcional)</span>
+                <button type="button" onclick="limparFotosReais()" id="btnLimparFotos" class="hidden text-[11px] font-semibold text-rose-600 hover:underline no-print">Remover fotos</button>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <label class="cursor-pointer border border-dashed border-slate-300 hover:border-sky-400 bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center min-h-[84px] overflow-hidden relative">
+                  <input type="file" accept="image/*" class="hidden" onchange="carregarFotoReal(event, 'imgRealFrente', 'placeholderFrente')">
+                  <img id="imgRealFrente" class="hidden w-full h-20 object-cover rounded" alt="Foto Frente" />
+                  <div id="placeholderFrente" class="text-[11px] text-slate-500">
+                    <span class="block font-bold text-sky-600">+ Foto Frente</span>
+                    <span>Anexar imagem</span>
+                  </div>
+                </label>
+
+                <label class="cursor-pointer border border-dashed border-slate-300 hover:border-sky-400 bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center min-h-[84px] overflow-hidden relative">
+                  <input type="file" accept="image/*" class="hidden" onchange="carregarFotoReal(event, 'imgRealTraseira', 'placeholderTraseira')">
+                  <img id="imgRealTraseira" class="hidden w-full h-20 object-cover rounded" alt="Foto Traseira" />
+                  <div id="placeholderTraseira" class="text-[11px] text-slate-500">
+                    <span class="block font-bold text-sky-600">+ Foto Traseira</span>
+                    <span>Anexar imagem</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grid Principal: Calculadora de Negociação + Checklist Técnico -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Coluna Esquerda: Simulador de Oferta e Abatimentos -->
+        <section class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 flex flex-col justify-between card-print">
+          <div class="space-y-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Passo 2</span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">Calculadora de Oferta & Abatimentos</h2>
+              <p class="text-xs text-slate-500">Informe o valor pedido e marque os defeitos encontrados.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="inputPedido" class="block text-xs font-semibold text-slate-700 mb-1">Valor Pedido (R$)</label>
+                <input type="number" id="inputPedido" placeholder="Ex: 1350" oninput="recalcular()" class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+              </div>
+              <div>
+                <label for="inputCustoExtra" class="block text-xs font-semibold text-slate-700 mb-1">Kit Capa/Película (R$)</label>
+                <input type="number" id="inputCustoExtra" value="40" oninput="recalcular()" class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+              </div>
+            </div>
+
+            <div class="space-y-2 pt-2">
+              <p class="text-xs font-bold text-slate-700 uppercase tracking-wide">Abatimentos por Estado do Aparelho:</p>
+
+              <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                <input type="checkbox" id="chkBateria" data-desconto="230" onchange="recalcular()" class="mt-0.5 w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-slate-800">
+                    <span>Bateria abaixo de 80% / desgastada</span>
+                    <span class="text-rose-600">-R$ 230</span>
+                  </div>
+                  <p class="text-slate-500 mt-0.5">Exige troca de bateria ou desconto na revenda.</p>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                <input type="checkbox" id="chkPeca" data-desconto="300" onchange="recalcular()" class="mt-0.5 w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-slate-800">
+                    <span>Tela ou peça trocada / paralela</span>
+                    <span class="text-rose-600">-R$ 300</span>
+                  </div>
+                  <p class="text-slate-500 mt-0.5">Aviso "Peça Desconhecida", sem True Tone ou tela LCD.</p>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                <input type="checkbox" id="chkMarcas" data-desconto="100" onchange="recalcular()" class="mt-0.5 w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-slate-800">
+                    <span>Marcas de uso / riscos na carcaça</span>
+                    <span class="text-rose-600">-R$ 100</span>
+                  </div>
+                  <p class="text-slate-500 mt-0.5">Batidas nas quinas ou arranhões visíveis.</p>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                <input type="checkbox" id="chkAcessorios" data-desconto="80" onchange="recalcular()" class="mt-0.5 w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-slate-800">
+                    <span>Sem caixa / sem cabo original</span>
+                    <span class="text-rose-600">-R$ 80</span>
+                  </div>
+                  <p class="text-slate-500 mt-0.5">Aparelho avulso reduz valor percebido pelo cliente final.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-200 space-y-3">
+            <div class="bg-slate-900 text-white rounded-xl p-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Proposta Máxima Sugerida (Pix):</span>
+                <span id="resPropostaMax" class="text-xl font-extrabold text-emerald-400">R$ 0</span>
+              </div>
+              <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t border-slate-800 text-xs">
+                <span class="text-slate-400">Lucro líquido se comprar na proposta:</span>
+                <span id="resLucroProposta" class="font-bold text-sky-300">R$ 0</span>
+              </div>
+              <div id="boxLucroPedido" class="hidden flex items-center justify-between mt-1 text-xs">
+                <span class="text-slate-400">Lucro se pagar o valor pedido:</span>
+                <span id="resLucroPedido" class="font-bold">R$ 0</span>
+              </div>
+            </div>
+
+            <div id="vereditoBox" class="rounded-xl p-3.5 border text-xs leading-relaxed bg-slate-50 border-slate-200 text-slate-700">
+              <strong id="vereditoTitulo" class="block text-sm font-bold mb-0.5">Aguardando valor pedido...</strong>
+              <span id="vereditoTexto">Digite acima quanto o vendedor está pedindo para calcular se vale a pena fechar negócio.</span>
+            </div>
+
+            <button type="button" onclick="copiarMensagemProposta()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs transition flex items-center justify-center gap-2 no-print">
+              <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span id="btnCopyLabel">Copiar Script de Oferta para Chat (OLX/WhatsApp)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Coluna Direita: Checklist Técnico Interativo & Editável -->
+        <section id="secChecklist" class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 flex flex-col justify-between card-print">
+          <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Passo 3 • Inspeção Presencial</span>
+                <h2 id="checklistTitulo" class="text-base sm:text-lg font-bold text-slate-900">Checklist Técnico — Apple iPhone</h2>
+              </div>
+              <div class="flex items-center gap-2 no-print">
+                <button type="button" onclick="toggleEditorChecklist()" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-50 text-sky-700 hover:bg-sky-100 border border-sky-200 transition">
+                  + Editar / Adicionar Itens
+                </button>
+                <button type="button" onclick="resetChecklist()" class="text-xs font-semibold text-slate-500 hover:text-slate-800 underline">
+                  Limpar marcações
+                </button>
+              </div>
+            </div>
+
+            <!-- Painel Colapsável: Adicionar / Gerenciar Itens do Checklist -->
+            <div id="painelEditorChecklist" class="hidden mb-4 p-4 rounded-xl bg-slate-50 border border-slate-300 space-y-3 no-print">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-extrabold uppercase tracking-wide text-slate-800">Personalizar Checklist (<span id="checklistSystemLabel">iOS</span>)</h3>
+                <button type="button" onclick="restaurarChecklistPadrao()" class="text-[11px] font-semibold text-rose-600 hover:underline">Restaurar itens padrão</button>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                <div class="sm:col-span-5">
+                  <input type="text" id="novoItemTitulo" placeholder="Título (ex: Conferir Nota Fiscal)" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-900">
+                </div>
+                <div class="sm:col-span-5">
+                  <input type="text" id="novoItemDesc" placeholder="Instrução de verificação..." class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-900">
+                </div>
+                <div class="sm:col-span-2">
+                  <button type="button" onclick="adicionarItemChecklist()" class="w-full h-full py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold">
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-500">Clique no ícone de lápis para editar diretamente um item abaixo ou na lixeira para remover.</p>
+            </div>
+
+            <!-- Barra de Progresso -->
+            <div class="mb-4 no-print">
+              <div class="flex justify-between text-xs font-semibold text-slate-600 mb-1">
+                <span id="progressText">0 de 7 itens verificados</span>
+                <span id="progressPercent">0%</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Lista de Itens do Checklist -->
+            <div id="checklistContainer" class="space-y-2.5">
+              <!-- Preenchido via JS -->
+            </div>
+          </div>
+
+          <!-- Alerta de Segurança -->
+          <div class="mt-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-900">
+            <strong class="font-bold block mb-0.5">Regra de Segurança no Pagamento:</strong>
+            Nunca faça Pix antecipado para "reservar" aparelho. Marque sempre na praça de alimentação de um shopping e só transfira o dinheiro após o aparelho ser restaurado de fábrica na sua frente e reiniciar na tela inicial ("Olá" / "Bem-vindo").
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- ABA 2: GUIA COMPLETO PARA IMPRESSÃO (IPHONE + ANDROID)    -->
+    <!-- ========================================================= -->
+    <div id="viewGuia" class="hidden space-y-6">
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">Documentação Completa — Tabelas de Preços & Checklists (2026)</h2>
+          <p class="text-xs sm:text-sm text-slate-500">Reflete automaticamente todas as edições de preços e checklists que você fez no sistema.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="https://www.gov.br/anatel/pt-br/assuntos/celular-legal/consulte-sua-situacao" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs sm:text-sm font-bold shadow-sm transition flex items-center">
+            Portal IMEI Anatel
+          </a>
+          <button type="button" onclick="imprimirGuiaCompleto()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-sm transition flex items-center justify-center gap-2 shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Imprimir / Salvar PDF Completo (A4)
+          </button>
+        </div>
+      </div>
+
+      <!-- Checklists Estáticos Lado a Lado -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 card-print">
+          <h3 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 mb-3 flex items-center justify-between">
+            <span>Checklist Técnico — Apple iPhone</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">iOS • consulta.anatel.gov.br</span>
+          </h3>
+          <ul id="staticChecklistIphone" class="space-y-2 text-xs text-slate-700"></ul>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 card-print">
+          <h3 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 mb-3 flex items-center justify-between">
+            <span>Checklist Técnico — Android (Samsung / Xiaomi)</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">Android • *#0*# / *#*#6484#*#*</span>
+          </h3>
+          <ul id="staticChecklistAndroid" class="space-y-2 text-xs text-slate-700"></ul>
+        </div>
+      </div>
+
+      <!-- Tabelas de Preços por Categoria -->
+      <div id="tabelasCompletasContainer" class="space-y-6">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <p><strong>AvaliaCell Pro</strong> — Valores de referência para aparelhos usados (128GB, bom estado, 100% originais) em 2026.</p>
+      <p>Consulta oficial de IMEI: <a href="https://www.gov.br/anatel/pt-br/assuntos/celular-legal/consulte-sua-situacao" target="_blank" rel="noopener noreferrer" class="text-sky-600 font-semibold underline">gov.br/anatel (Celular Legal)</a></p>
+    </div>
+  </footer>
+
+  <!-- Toast de Notificação -->
+  <div id="toast" class="fixed bottom-20 md:bottom-5 right-5 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    Ação concluída!
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // =========================================================================
+      // BASE LOCAL OFFLINE DE ESTADOS E CIDADES DO BRASIL (ZERO DEPENDÊNCIA DE REDE)
+      // =========================================================================
+      const ESTADOS_BR = [
+        { uf: "AC", nome: "Acre", olxSub: "ac", cidades: ["Rio Branco", "Cruzeiro do Sul", "Sena Madureira"] },
+        { uf: "AL", nome: "Alagoas", olxSub: "al", cidades: ["Maceió", "Arapiraca", "Rio Largo", "Palmeira dos Índios"] },
+        { uf: "AP", nome: "Amapá", olxSub: "ap", cidades: ["Macapá", "Santana", "Laranjal do Jari"] },
+        { uf: "AM", nome: "Amazonas", olxSub: "am", cidades: ["Manaus", "Parintins", "Itacoatiara", "Manacapuru"] },
+        { uf: "BA", nome: "Bahia", olxSub: "ba", cidades: ["Salvador", "Feira de Santana", "Vitória da Conquista", "Camaçari", "Itabuna", "Juazeiro", "Lauro de Freitas"] },
+        { uf: "CE", nome: "Ceará", olxSub: "ce", cidades: ["Fortaleza", "Caucaia", "Juazeiro do Norte", "Maracanaú", "Sobral"] },
+        { uf: "DF", nome: "Distrito Federal", olxSub: "df", cidades: ["Brasília", "Taguatinga", "Ceilândia", "Águas Claras", "Samambaia"] },
+        { uf: "ES", nome: "Espírito Santo", olxSub: "es", cidades: ["Vitória", "Vila Velha", "Serra", "Cariacica", "Cachoeiro de Itapemirim"] },
+        { uf: "GO", nome: "Goiás", olxSub: "go", cidades: ["Goiânia", "Aparecida de Goiânia", "Anápolis", "Rio Verde", "Luziânia"] },
+        { uf: "MA", nome: "Maranhão", olxSub: "ma", cidades: ["São Luís", "Imperatriz", "São José de Ribamar", "Timon", "Caxias"] },
+        { uf: "MT", nome: "Mato Grosso", olxSub: "mt", cidades: ["Cuiabá", "Várzea Grande", "Rondonópolis", "Sinop"] },
+        { uf: "MS", nome: "Mato Grosso do Sul", olxSub: "ms", cidades: ["Campo Grande", "Dourados", "Três Lagoas", "Corumbá"] },
+        { uf: "MG", nome: "Minas Gerais", olxSub: "mg", cidades: ["Belo Horizonte", "Uberlândia", "Contagem", "Juiz de Fora", "Betim", "Montes Claros", "Uberaba"] },
+        { uf: "PA", nome: "Pará", olxSub: "pa", cidades: ["Belém", "Ananindeua", "Santarém", "Marabá", "Parauapebas"] },
+        { uf: "PB", nome: "Paraíba", olxSub: "pb", cidades: ["João Pessoa", "Campina Grande", "Santa Rita", "Patos", "Cabedelo"] },
+        { uf: "PR", nome: "Paraná", olxSub: "pr", cidades: ["Curitiba", "Londrina", "Maringá", "Ponta Grossa", "Cascavel", "São José dos Pinhais", "Foz do Iguaçu"] },
+        { uf: "PE", nome: "Pernambuco", olxSub: "pe", cidades: ["Recife", "Jaboatão dos Guararapes", "Olinda", "Caruaru", "Petrolina", "Paulista", "Cabo de Santo Agostinho", "Camaragibe", "Garanhuns", "Vitória de Santo Antão"] },
+        { uf: "PI", nome: "Piauí", olxSub: "pi", cidades: ["Teresina", "Parnaíba", "Picos", "Piripiri"] },
+        { uf: "RJ", nome: "Rio de Janeiro", olxSub: "rj", cidades: ["Rio de Janeiro", "São Gonçalo", "Duque de Caxias", "Nova Iguaçu", "Niterói", "Campos dos Goytacazes", "Petrópolis"] },
+        { uf: "RN", nome: "Rio Grande do Norte", olxSub: "rn", cidades: ["Natal", "Mossoró", "Parnamirim", "São Gonçalo do Amarante"] },
+        { uf: "RS", nome: "Rio Grande do Sul", olxSub: "rs", cidades: ["Porto Alegre", "Caxias do Sul", "Canoas", "Pelotas", "Santa Maria", "Gravataí", "Novo Hamburgo"] },
+        { uf: "RO", nome: "Rondônia", olxSub: "ro", cidades: ["Porto Velho", "Ji-Paraná", "Ariquemes", "Vilhena"] },
+        { uf: "RR", nome: "Roraima", olxSub: "rr", cidades: ["Boa Vista", "Rorainópolis"] },
+        { uf: "SC", nome: "Santa Catarina", olxSub: "sc", cidades: ["Florianópolis", "Joinville", "Blumenau", "São José", "Chapecó", "Itajaí", "Criciúma"] },
+        { uf: "SP", nome: "São Paulo", olxSub: "sp", cidades: ["São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo", "Santo André", "Osasco", "Sorocaba", "Ribeirão Preto", "São José dos Campos", "Santos"] },
+        { uf: "SE", nome: "Sergipe", olxSub: "se", cidades: ["Aracaju", "Nossa Senhora do Socorro", "Lagarto", "Itabaiana"] },
+        { uf: "TO", nome: "Tocantins", olxSub: "to", cidades: ["Palmas", "Araguaína", "Gurupi"] }
+      ];
+
+      // =========================================================================
+      // CATÁLOGO COMPLETO (2026) — INCLUINDO VALORES EXATOS DO PDF PARA IPHONE
+      // =========================================================================
+      const DEFAULT_CATALOGO = {
+        apple: {
+          nome: "Apple iPhone (12 ao 18 Pro Max)",
+          tipoSistema: "iphone",
+          versaoAtual: "iOS 27",
+          modelos: [
+            { nome: "iPhone 12", compraMin: 800, compraMax: 900, teto: 980, revendaMin: 1150, revendaMax: 1300, atualizaAte: "2027", liquidez: "Média", visual: "notch_dual_vert", cor: "#1e293b", dica: "Só compre se bateria ≥ 82% e preço bem abaixo do teto." },
+            { nome: "iPhone 12 Pro", compraMin: 1050, compraMax: 1150, teto: 1250, revendaMin: 1450, revendaMax: 1600, atualizaAte: "2027", liquidez: "Média", visual: "notch_triple", cor: "#334155", dica: "Verifique se o sensor LiDAR e a lente teleobjetiva focam rápido." },
+            { nome: "iPhone 12 Pro Max", compraMin: 1250, compraMax: 1380, teto: 1480, revendaMin: 1700, revendaMax: 1900, atualizaAte: "2027", liquidez: "Boa", visual: "notch_triple", cor: "#1e3a5f", dica: "Tela grande tem boa procura; confira se nunca foi aberta." },
+            { nome: "iPhone 13", compraMin: 1050, compraMax: 1150, teto: 1250, revendaMin: 1450, revendaMax: 1600, atualizaAte: "2028", liquidez: "Muito Alta", visual: "notch_dual_diag", cor: "#0f172a", dica: "Campeão de giro rápido; vende em poucos dias." },
+            { nome: "iPhone 13 Pro", compraMin: 1400, compraMax: 1550, teto: 1650, revendaMin: 1900, revendaMax: 2100, atualizaAte: "2028", liquidez: "Alta", visual: "notch_triple", cor: "#475569", dica: "Tela 120Hz ProMotion muito valorizada; teste câmera macro." },
+            { nome: "iPhone 13 Pro Max", compraMin: 1650, compraMax: 1800, teto: 1900, revendaMin: 2200, revendaMax: 2450, atualizaAte: "2028", liquidez: "Alta", visual: "notch_triple", cor: "#2e4057", dica: "Atenção à tela branca/verde crônica; confira originalidade." },
+            { nome: "iPhone 14", compraMin: 1300, compraMax: 1450, teto: 1500, revendaMin: 1700, revendaMax: 1850, atualizaAte: "2029", liquidez: "Muito Alta", visual: "notch_dual_diag", cor: "#7c3aed", dica: "Equilíbrio ideal entre preço e longevidade; excelente revenda." },
+            { nome: "iPhone 14 Plus", compraMin: 1500, compraMax: 1650, teto: 1750, revendaMin: 2000, revendaMax: 2200, atualizaAte: "2029", liquidez: "Boa", visual: "notch_dual_diag", cor: "#0284c7", dica: "Bateria de longa duração atrai quem trabalha com o celular." },
+            { nome: "iPhone 14 Pro", compraMin: 1750, compraMax: 1900, teto: 2000, revendaMin: 2300, revendaMax: 2500, atualizaAte: "2029", liquidez: "Muito Alta", visual: "island_triple", cor: "#4c1d95", dica: "Dynamic Island e câmera 48MP; muito desejado no mercado." },
+            { nome: "iPhone 14 Pro Max", compraMin: 2050, compraMax: 2200, teto: 2350, revendaMin: 2650, revendaMax: 2900, atualizaAte: "2029", liquidez: "Muito Alta", visual: "island_triple", cor: "#312e81", dica: "Alto valor agregado; exige rigor na checagem de peças." },
+            { nome: "iPhone 15", compraMin: 1650, compraMax: 1800, teto: 1900, revendaMin: 2150, revendaMax: 2350, atualizaAte: "2030", liquidez: "Muito Alta", visual: "island_dual_diag", cor: "#db2777", dica: "USB-C e Dynamic Island fazem vender muito rápido." },
+            { nome: "iPhone 15 Plus", compraMin: 1900, compraMax: 2050, teto: 2180, revendaMin: 2450, revendaMax: 2700, atualizaAte: "2030", liquidez: "Boa", visual: "island_dual_diag", cor: "#059669", dica: "Ótima margem quando comprado de particular com urgência." },
+            { nome: "iPhone 15 Pro", compraMin: 2350, compraMax: 2550, teto: 2700, revendaMin: 3000, revendaMax: 3300, atualizaAte: "2030", liquidez: "Alta", visual: "island_triple", cor: "#57534e", dica: "Chassi em titânio e Apple Intelligence; confira aro das lentes." },
+            { nome: "iPhone 15 Pro Max", compraMin: 2750, compraMax: 2950, teto: 3150, revendaMin: 3500, revendaMax: 3850, atualizaAte: "2030", liquidez: "Alta", visual: "island_triple", cor: "#44403c", dica: "Teste zoom óptico 5x e botão de Ação lateral." },
+            { nome: "iPhone 16", compraMin: 2250, compraMax: 2450, teto: 2600, revendaMin: 2900, revendaMax: 3150, atualizaAte: "2031", liquidez: "Muito Alta", visual: "island_dual_pill", cor: "#2563eb", dica: "Câmeras verticais em pílula e botão Controle da Câmera." },
+            { nome: "iPhone 16 Plus", compraMin: 2500, compraMax: 2700, teto: 2850, revendaMin: 3150, revendaMax: 3450, atualizaAte: "2031", liquidez: "Boa", visual: "island_dual_pill", cor: "#0d9488", dica: "Confira sensibilidade do botão capacitivo lateral." },
+            { nome: "iPhone 16 Pro", compraMin: 2950, compraMax: 3200, teto: 3350, revendaMin: 3750, revendaMax: 4100, atualizaAte: "2031", liquidez: "Alta", visual: "island_triple", cor: "#78716c", dica: "Tela 6.3 polegadas; confira nota fiscal e garantia Apple." },
+            { nome: "iPhone 16 Pro Max", compraMin: 3450, compraMax: 3700, teto: 3900, revendaMin: 4300, revendaMax: 4700, atualizaAte: "2031", liquidez: "Alta", visual: "island_triple", cor: "#292524", dica: "Tela 6.9 polegadas; exija caixa original e procedência." },
+            { nome: "iPhone 17 / 17 Air", compraMin: 2900, compraMax: 3150, teto: 3300, revendaMin: 3650, revendaMax: 3950, atualizaAte: "2032", liquidez: "Alta", visual: "island_dual_pill", cor: "#0284c7", dica: "Linha recente com tela 120Hz; verifique garantia ativa." },
+            { nome: "iPhone 17 Pro / Pro Max", compraMin: 3950, compraMax: 4300, teto: 4550, revendaMin: 4950, revendaMax: 5450, atualizaAte: "2032", liquidez: "Média-Alta", visual: "island_triple", cor: "#1e293b", dica: "Ticket alto; venda geralmente exige parcelamento em 12x." },
+            { nome: "iPhone 18 / 18 Pro / Pro Max", compraMin: 4600, compraMax: 5200, teto: 5500, revendaMin: 5900, revendaMax: 6500, atualizaAte: "2033", liquidez: "Média", visual: "island_triple", cor: "#0f172a", dica: "Geração atual (2026); só feche com nota fiscal nominal." }
+          ]
+        },
+        samsung_s: {
+          nome: "Samsung Galaxy Linha S (S22 ao S26)",
+          tipoSistema: "android",
+          versaoAtual: "Android 17 / One UI 9",
+          modelos: [
+            { nome: "Galaxy S22 (128GB)", compraMin: 850, compraMax: 950, teto: 1050, revendaMin: 1250, revendaMax: 1400, atualizaAte: "2027", liquidez: "Boa", visual: "punch_triple_vert", cor: "#1e293b", dica: "Compacto; verifique aquecimento e duração da bateria." },
+            { nome: "Galaxy S22 Ultra", compraMin: 1450, compraMax: 1600, teto: 1720, revendaMin: 2000, revendaMax: 2250, atualizaAte: "2027", liquidez: "Boa", visual: "punch_ultra", cor: "#4c1d95", dica: "Teste a S-Pen (Bluetooth e escrita) e o zoom 10x." },
+            { nome: "Galaxy S23 (128GB/256GB)", compraMin: 1150, compraMax: 1300, teto: 1400, revendaMin: 1650, revendaMax: 1850, atualizaAte: "2028", liquidez: "Muito Alta", visual: "punch_triple_vert", cor: "#0f172a", dica: "Excelente custo-benefício com Snapdragon; pouca concorrência." },
+            { nome: "Galaxy S23 Plus", compraMin: 1350, compraMax: 1500, teto: 1620, revendaMin: 1900, revendaMax: 2100, atualizaAte: "2028", liquidez: "Boa", visual: "punch_triple_vert", cor: "#334155", dica: "Bateria superior ao S23 base; confira tampa traseira." },
+            { nome: "Galaxy S23 Ultra", compraMin: 1950, compraMax: 2150, teto: 2300, revendaMin: 2650, revendaMax: 2950, atualizaAte: "2028", liquidez: "Muito Alta", visual: "punch_ultra", cor: "#064e3b", dica: "Um dos Androids mais procurados; teste S-Pen e tela curva." },
+            { nome: "Galaxy S24 / S24 FE", compraMin: 1450, compraMax: 1600, teto: 1720, revendaMin: 2000, revendaMax: 2250, atualizaAte: "2031", liquidez: "Muito Alta", visual: "punch_triple_vert", cor: "#475569", dica: "7 anos de atualizações Samsung valorizam muito na revenda." },
+            { nome: "Galaxy S24 Ultra", compraMin: 2550, compraMax: 2800, teto: 2980, revendaMin: 3350, revendaMax: 3700, atualizaAte: "2031", liquidez: "Alta", visual: "punch_ultra", cor: "#57534e", dica: "Tela plana antirreflexo; verifique se não há riscos no vidro." },
+            { nome: "Galaxy S25 / S25 Plus", compraMin: 2150, compraMax: 2400, teto: 2550, revendaMin: 2900, revendaMax: 3200, atualizaAte: "2032", liquidez: "Alta", visual: "punch_triple_vert", cor: "#1d4ed8", dica: "Snapdragon Elite; ótimo giro entre usuários exigentes." },
+            { nome: "Galaxy S25 Ultra", compraMin: 3250, compraMax: 3550, teto: 3750, revendaMin: 4200, revendaMax: 4600, atualizaAte: "2032", liquidez: "Alta", visual: "punch_ultra", cor: "#1e293b", dica: "Cantos arredondados em titânio; exija nota fiscal." },
+            { nome: "Galaxy S26 / S26 Ultra", compraMin: 3800, compraMax: 4400, teto: 4700, revendaMin: 5150, revendaMax: 5750, atualizaAte: "2033", liquidez: "Média-Alta", visual: "punch_ultra", cor: "#0f172a", dica: "Lançamento 2026; atenção redobrada a aparelhos de operadora." }
+          ]
+        },
+        samsung_a: {
+          nome: "Samsung Galaxy Linha A (A34 ao A57)",
+          tipoSistema: "android",
+          versaoAtual: "Android 17 / One UI 9",
+          modelos: [
+            { nome: "Galaxy A34 5G", compraMin: 550, compraMax: 650, teto: 720, revendaMin: 880, revendaMax: 1000, atualizaAte: "2028", liquidez: "Alta", visual: "punch_triple_vert", cor: "#047857", dica: "Ticket baixo para começar gastando pouco; gira rápido." },
+            { nome: "Galaxy A54 5G", compraMin: 680, compraMax: 780, teto: 850, revendaMin: 1050, revendaMax: 1200, atualizaAte: "2028", liquidez: "Muito Alta", visual: "punch_triple_vert", cor: "#7c3aed", dica: "Traseira em vidro; confira se não está descolando." },
+            { nome: "Galaxy A35 5G", compraMin: 680, compraMax: 780, teto: 850, revendaMin: 1050, revendaMax: 1180, atualizaAte: "2029", liquidez: "Alta", visual: "punch_triple_vert", cor: "#0284c7", dica: "Bom giro na faixa de R$ 1.100 parcelado no cartão." },
+            { nome: "Galaxy A55 5G", compraMin: 850, compraMax: 980, teto: 1060, revendaMin: 1300, revendaMax: 1450, atualizaAte: "2029", liquidez: "Muito Alta", visual: "punch_triple_vert", cor: "#1e3a8a", dica: "Aro em alumínio; um dos campeões de venda no Brasil." },
+            { nome: "Galaxy A36 / A56 5G", compraMin: 1050, compraMax: 1200, teto: 1300, revendaMin: 1550, revendaMax: 1750, atualizaAte: "2031", liquidez: "Muito Alta", visual: "punch_triple_vert", cor: "#0f172a", dica: "6 anos de atualizações; excelente liquidez em 2026." },
+            { nome: "Galaxy A57 5G", compraMin: 1300, compraMax: 1480, teto: 1580, revendaMin: 1850, revendaMax: 2050, atualizaAte: "2032", liquidez: "Alta", visual: "punch_triple_vert", cor: "#334155", dica: "Modelo recente (2026); verifique garantia Samsung." }
+          ]
+        },
+        xiaomi: {
+          nome: "Xiaomi / Poco / Redmi",
+          tipoSistema: "android",
+          versaoAtual: "HyperOS 3 (Android 17)",
+          modelos: [
+            { nome: "Redmi Note 13 / 13 Pro 5G", compraMin: 650, compraMax: 780, teto: 850, revendaMin: 1050, revendaMax: 1200, atualizaAte: "2028", liquidez: "Alta", visual: "punch_xiaomi_box", cor: "#0f172a", dica: "Confira se é versão Global e se vem com carregador turbo." },
+            { nome: "Redmi Note 14 / 14 Pro 5G", compraMin: 850, compraMax: 980, teto: 1060, revendaMin: 1300, revendaMax: 1480, atualizaAte: "2029", liquidez: "Muito Alta", visual: "punch_xiaomi_box", cor: "#4338ca", dica: "Muito procurado no OLX; carregador original agrega R$ 80." },
+            { nome: "Redmi Note 15 / 15 Pro", compraMin: 1050, compraMax: 1200, teto: 1300, revendaMin: 1550, revendaMax: 1750, atualizaAte: "2030", liquidez: "Alta", visual: "punch_xiaomi_box", cor: "#0369a1", dica: "Verifique se a Conta Mi foi totalmente desconectada." },
+            { nome: "Poco X6 Pro 5G (256GB)", compraMin: 950, compraMax: 1100, teto: 1180, revendaMin: 1450, revendaMax: 1650, atualizaAte: "2028", liquidez: "Muito Alta", visual: "punch_xiaomi_box", cor: "#ca8a04", dica: "Queridinho do público gamer; vende muito rápido." },
+            { nome: "Poco X7 Pro / F6 Pro", compraMin: 1250, compraMax: 1420, teto: 1520, revendaMin: 1800, revendaMax: 2050, atualizaAte: "2029", liquidez: "Muito Alta", visual: "punch_xiaomi_box", cor: "#1e293b", dica: "Alta procura; teste aquecimento e carregador de 90W/120W." },
+            { nome: "Poco F7 / Xiaomi 14T / 15T", compraMin: 1650, compraMax: 1850, teto: 1980, revendaMin: 2300, revendaMax: 2600, atualizaAte: "2030", liquidez: "Boa", visual: "punch_xiaomi_box", cor: "#0f172a", dica: "Câmeras Leica; exija caixa e carregador original." }
+          ]
+        }
+      };
+
+      // =========================================================================
+      // CHECKLISTS PADRÃO (iOS E ANDROID)
+      // =========================================================================
+      const DEFAULT_CHECKLISTS = {
+        iphone: [
+          { titulo: "1. Consulta de IMEI na Anatel (*#06#)", desc: "Acesse gov.br/anatel (Celular Legal) e confirme status 'Regular / Sem restrições'. Confira se o IMEI da tela bate com o da gaveta do chip." },
+          { titulo: "2. Origem do Número de Modelo", desc: "Em Ajustes > Geral > Sobre: letra M = novo original; N = substituído Apple; F = recondicionado oficial. Evite aparelhos iniciados com 3 (vitrine)." },
+          { titulo: "3. Histórico de Peças e Serviços", desc: "Em Ajustes > Geral > Sobre, verifique se há aviso de 'Peça Desconhecida' (tela, bateria ou câmera paralela derrubam o preço)." },
+          { titulo: "4. True Tone e Parafusos Inferiores", desc: "Segure a barra de brilho na Central de Controle e confirme o botão True Tone ativo. Olhe os parafusos inferiores para ver se nunca foi aberto." },
+          { titulo: "5. Saúde da Bateria (Ajustes > Bateria)", desc: "85%+ = revenda com lucro cheio; 80% a 84% = peça R$ 100 de desconto; abaixo de 80% = aviso 'Manutenção' (abata R$ 230)." },
+          { titulo: "6. Face ID, Câmeras e Microfones", desc: "Cadastre seu rosto no Face ID, teste todas as lentes (0.5x, 1x, zoom, frontal) e grave um vídeo/áudio para checar som e foco." },
+          { titulo: "7. Chip 4G/5G e Remoção Total do iCloud", desc: "Teste seu chip de operadora, Wi-Fi e carregador. Exija que o vendedor saia do iCloud e apague todo o conteúdo na sua frente antes do Pix." }
+        ],
+        android: [
+          { titulo: "1. Consulta de IMEI na Anatel (*#06#)", desc: "Acesse gov.br/anatel e confirme status 'Regular'. Verifique os dois IMEIs (Chip 1 e Chip 2) para descartar bloqueio de operadora ou perda." },
+          { titulo: "2. Menu de Diagnóstico de Hardware", desc: "No Samsung digite *#0*# e no Xiaomi digite *#*#6484#*#* para testar cores da tela (burn-in), touch screen, sensores, vibração e alto-falantes." },
+          { titulo: "3. Verificação de Bloqueio Empresarial / Operadora", desc: "Em Configurações > Contas e Apps, confirme se não existe perfil corporativo (MDM / Knox Guard / PayJoy) que bloqueia o aparelho por falta de pagamento." },
+          { titulo: "4. Tela Original (AMOLED vs LCD Paralela)", desc: "Coloque uma imagem preta em ambiente escuro: na tela original o preto é totalmente apagado (zero luz vazando nas bordas) e o leitor digital na tela funciona rápido." },
+          { titulo: "5. Tampa Traseira, Câmeras e Carregamento Turbo", desc: "Verifique se a tampa traseira não está descolando (sinal de bateria inchada). Conecte o carregador e confirme o aviso de 'Carregamento Rápido / Turbo'." },
+          { titulo: "6. Teste de Chip, Wi-Fi, GPS e Microfones", desc: "Insira seu chip, faça uma ligação de teste (verifique sensor de proximidade) e teste todas as câmeras traseiras e frontal." },
+          { titulo: "7. Remoção de Conta Google, Samsung e Conta Mi", desc: "Remova TODAS as contas (Google, Samsung Account e Conta Mi no Xiaomi) antes de formatar, evitando bloqueio FRP na tela inicial." }
+        ]
+      };
+
+      // =========================================================================
+      // ESTADO EM MEMÓRIA E PERSISTÊNCIA SEGURA EM LOCALSTORAGE
+      // =========================================================================
+      function carregarStorage(chave, fallback) {
+        try {
+          const raw = window.localStorage.getItem(chave);
+          return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(fallback));
+        } catch (e) {
+          return JSON.parse(JSON.stringify(fallback));
+        }
+      }
+
+      let CATALOGO = carregarStorage("avaliacell_catalogo_v3", DEFAULT_CATALOGO);
+      let CHECKLISTS = carregarStorage("avaliacell_checklists_v3", DEFAULT_CHECKLISTS);
+      let LOCALIZACAO = carregarStorage("avaliacell_local_v3", { uf: "PE", cidade: "Recife" });
+
+      function persistirDados() {
+        try {
+          window.localStorage.setItem("avaliacell_catalogo_v3", JSON.stringify(CATALOGO));
+          window.localStorage.setItem("avaliacell_checklists_v3", JSON.stringify(CHECKLISTS));
+          window.localStorage.setItem("avaliacell_local_v3", JSON.stringify(LOCALIZACAO));
+        } catch (e) {
+          // Ignora silenciosamente se o navegador bloquear storage em modo privado
+        }
+      }
+
+      function slugify(texto) {
+        return (texto || "")
+          .toString()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\s-]/g, "")
+          .replace(/\s+/g, "-");
+      }
+
+      function formatBRL(valor) {
+        return Number(valor || 0).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+          maximumFractionDigits: 0
+        });
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.remove("opacity-0");
+        toast.classList.add("opacity-100");
+        setTimeout(function () {
+          toast.classList.remove("opacity-100");
+          toast.classList.add("opacity-0");
+        }, 2800);
+      }
+
+      // =========================================================================
+      // LOCALIZAÇÃO (27 UFs + CIDADES OFFLINE) E LINKS DAS LOJAS
+      // =========================================================================
+      function initLocalizacao() {
+        const selectEstado = document.getElementById("selectEstado");
+        const inputCidade = document.getElementById("inputCidade");
+        if (!selectEstado || !inputCidade) return;
+
+        selectEstado.innerHTML = ESTADOS_BR.map(function (e) {
+          return '<option value="' + e.uf + '">' + e.uf + ' — ' + e.nome + '</option>';
+        }).join("");
+
+        selectEstado.value = LOCALIZACAO.uf || "PE";
+        inputCidade.value = LOCALIZACAO.cidade || "Recife";
+        atualizarDatalistCidades(selectEstado.value, false);
+      }
+
+      function atualizarDatalistCidades(uf, preencherCapital) {
+        const datalist = document.getElementById("listaCidadesLocal");
+        const inputCidade = document.getElementById("inputCidade");
+        const estadoObj = ESTADOS_BR.find(function (e) { return e.uf === uf; });
+        if (!estadoObj) return;
+
+        if (datalist) {
+          datalist.innerHTML = estadoObj.cidades.map(function (c) {
+            return '<option value="' + c + '"></option>';
+          }).join("");
+        }
+
+        if (preencherCapital && inputCidade) {
+          inputCidade.value = estadoObj.cidades[0] || "";
+          LOCALIZACAO.cidade = inputCidade.value;
+          persistirDados();
+        }
+        atualizarLinksLojas();
+      }
+
+      function onEstadoChange() {
+        const selectEstado = document.getElementById("selectEstado");
+        if (!selectEstado) return;
+        LOCALIZACAO.uf = selectEstado.value;
+        persistirDados();
+        atualizarDatalistCidades(selectEstado.value, true);
+      }
+
+      function onCidadeChange() {
+        const inputCidade = document.getElementById("inputCidade");
+        if (!inputCidade) return;
+        LOCALIZACAO.cidade = inputCidade.value.trim();
+        persistirDados();
+        atualizarLinksLojas();
+      }
+
+      function atualizarLinksLojas() {
+        const info = getModeloAtual();
+        if (!info || !info.modelo) return;
+
+        const selectArm = document.getElementById("selectArmazenamento");
+        const gbTexto = (selectArm && selectArm.options[selectArm.selectedIndex])
+          ? selectArm.options[selectArm.selectedIndex].getAttribute("data-gb")
+          : "128GB";
+
+        const selectEstado = document.getElementById("selectEstado");
+        const ufUpper = (selectEstado ? selectEstado.value : "PE") || "PE";
+        const ufLower = ufUpper.toLowerCase();
+        const estadoObj = ESTADOS_BR.find(function (e) { return e.uf === ufUpper; });
+
+        const inputCidade = document.getElementById("inputCidade");
+        const cidade = (inputCidade ? inputCidade.value : "").trim();
+        const ordenacao = document.getElementById("selectOrdenacaoLoja")
+          ? document.getElementById("selectOrdenacaoLoja").value
+          : "recentes";
+
+        // Limpa parênteses extras do nome do modelo para busca precisa nas lojas
+        const nomeLimpo = info.modelo.nome.replace(/\s*\(.*?\)\s*/g, " ").trim();
+        const termoBusca = (nomeLimpo + " " + gbTexto).trim();
+        const termoComCidade = cidade ? (termoBusca + " " + cidade) : termoBusca;
+
+        const queryEncoded = encodeURIComponent(termoBusca);
+        const queryCidadeEncoded = encodeURIComponent(termoComCidade);
+        const querySlug = slugify(termoBusca);
+        const cidadeSlug = slugify(cidade || (estadoObj ? estadoObj.cidades[0] : "recife"));
+
+        const elModeloLabel = document.getElementById("lojaModeloLabel");
+        if (elModeloLabel) elModeloLabel.textContent = termoBusca;
+
+        const elSubOLX = document.getElementById("subOLX");
+        if (elSubOLX) elSubOLX.textContent = cidade ? (ufUpper + " • " + cidade) : ("Estado " + ufUpper);
+
+        const elSubFB = document.getElementById("subFacebook");
+        if (elSubFB) elSubFB.textContent = cidade ? ("Marketplace • " + cidade) : ("Marketplace • " + ufUpper);
+
+        const elSubGoogle = document.getElementById("subGoogle");
+        if (elSubGoogle) elSubGoogle.textContent = cidade ? (cidade + " - " + ufUpper) : ("Estado " + ufUpper);
+
+        // 1. OLX Brasil (subdomínio do estado ex: pe.olx.com.br)
+        let olxSort = "";
+        if (ordenacao === "recentes") olxSort = "&sf=1";
+        if (ordenacao === "menor_preco") olxSort = "&sp=1";
+        const linkOLX = document.getElementById("linkOLX");
+        if (linkOLX) {
+          linkOLX.href = "https://" + ufLower + ".olx.com.br/celulares?q=" + queryCidadeEncoded + olxSort;
+        }
+
+        // 2. Facebook Marketplace
+        let fbSort = "";
+        if (ordenacao === "recentes") fbSort = "&sortBy=creation_time_descend";
+        if (ordenacao === "menor_preco") fbSort = "&sortBy=price_ascend";
+        const linkFB = document.getElementById("linkFacebook");
+        if (linkFB) {
+          linkFB.href = "https://www.facebook.com/marketplace/" + cidadeSlug + "/search/?query=" + queryEncoded + fbSort;
+        }
+
+        // 3. Mercado Livre (Usados)
+        const mlSort = ordenacao === "menor_preco" ? "_OrderId_PRICE" : "";
+        const linkML = document.getElementById("linkMercadoLivre");
+        if (linkML) {
+          linkML.href = "https://lista.mercadolivre.com.br/celulares-telefones/celulares-smartphones/usado/" + querySlug + mlSort;
+        }
+
+        // 4. Enjoei
+        let enjoeiSort = "";
+        if (ordenacao === "menor_preco") enjoeiSort = "&s=price_asc";
+        if (ordenacao === "recentes") enjoeiSort = "&s=newest";
+        const linkEnjoei = document.getElementById("linkEnjoei");
+        if (linkEnjoei) {
+          linkEnjoei.href = "https://www.enjoei.com.br/s?q=" + queryEncoded + enjoeiSort;
+        }
+
+        // 5. Google Local
+        const linkGoogle = document.getElementById("linkGoogle");
+        if (linkGoogle) {
+          linkGoogle.href = "https://www.google.com/search?q=" + encodeURIComponent(termoBusca + " usado " + cidade + " " + ufUpper);
+        }
+      }
+
+      // =========================================================================
+      // DESENHO TÉCNICO SVG (FRENTE E TRASEIRA DINÂMICOS POR MODELO)
+      // =========================================================================
+      function renderVisualDesign(modelo) {
+        const frontContainer = document.getElementById("svgFrontContainer");
+        const backContainer = document.getElementById("svgBackContainer");
+        const cameraTag = document.getElementById("visualCameraTag");
+        const designDesc = document.getElementById("visualDesignDesc");
+        const frontNote = document.getElementById("visualFrontNote");
+        const backNote = document.getElementById("visualBackNote");
+
+        if (!frontContainer || !backContainer) return;
+
+        const cor = modelo.cor || "#1e293b";
+        const visual = modelo.visual || "notch_dual_diag";
+        const isIphone = visual.indexOf("notch") === 0 || visual.indexOf("island") === 0;
+
+        // Top cutout frontal
+        let frontTopSvg = "";
+        if (visual.indexOf("notch") === 0) {
+          frontTopSvg = '<rect x="34" y="8" width="42" height="10" rx="5" fill="#090d16"/>';
+          frontNote.textContent = "Entalhe superior (Notch) padrão Apple; confira True Tone e bordas simétricas.";
+        } else if (visual.indexOf("island") === 0) {
+          frontTopSvg = '<rect x="38" y="11" width="34" height="8" rx="4" fill="#090d16"/>';
+          frontNote.textContent = "Dynamic Island centralizada; confira se a tela é OLED original (preto profundo).";
+        } else {
+          frontTopSvg = '<circle cx="55" cy="14" r="3.2" fill="#090d16"/>';
+          frontNote.textContent = "Furo de câmera centralizado; digite *#0*# (Samsung) para testar o painel.";
+        }
+
+        frontContainer.innerHTML =
+          '<svg viewBox="0 0 110 190" class="w-full h-full drop-shadow-sm">' +
+            '<rect x="6" y="4" width="98" height="182" rx="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>' +
+            '<rect x="10" y="8" width="90" height="174" rx="14" fill="url(#screenGrad)"/>' +
+            '<defs>' +
+              '<linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">' +
+                '<stop offset="0%" stop-color="#0284c7" stop-opacity="0.25"/>' +
+                '<stop offset="50%" stop-color="#1e293b" stop-opacity="0.9"/>' +
+                '<stop offset="100%" stop-color="#0f172a" stop-opacity="1"/>' +
+              '</linearGradient>' +
+            '</defs>' +
+            frontTopSvg +
+            '<rect x="36" y="174" width="38" height="3" rx="1.5" fill="#94a3b8" opacity="0.7"/>' +
+          '</svg>';
+
+        // Módulo traseiro
+        let backModuleSvg = "";
+        if (visual === "notch_dual_vert" || visual === "island_dual_pill") {
+          cameraTag.textContent = "Câmera Dupla Vertical";
+          designDesc.textContent = modelo.nome + " — Módulo traseiro com duas lentes alinhadas verticalmente.";
+          backNote.textContent = "Aros das duas lentes alinhados; sem poeira interna ou embaçamento.";
+          backModuleSvg =
+            '<rect x="16" y="14" width="34" height="48" rx="12" fill="rgba(15,23,42,0.55)" stroke="rgba(255,255,255,0.25)"/>' +
+            '<circle cx="29" cy="27" r="7.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.5"/>' +
+            '<circle cx="29" cy="49" r="7.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.5"/>' +
+            '<circle cx="43" cy="38" r="2.5" fill="#fef08a"/>';
+        } else if (visual === "notch_dual_diag" || visual === "island_dual_diag") {
+          cameraTag.textContent = "Câmera Dupla Diagonal";
+          designDesc.textContent = modelo.nome + " — Módulo quadrado com lentes em diagonal e vidro traseiro.";
+          backNote.textContent = "Vidro traseiro íntegro; confira vedação ao redor do módulo quadrado.";
+          backModuleSvg =
+            '<rect x="16" y="14" width="44" height="44" rx="12" fill="rgba(15,23,42,0.55)" stroke="rgba(255,255,255,0.25)"/>' +
+            '<circle cx="28" cy="26" r="7.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.5"/>' +
+            '<circle cx="48" cy="46" r="7.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.5"/>' +
+            '<circle cx="48" cy="25" r="2.5" fill="#fef08a"/>';
+        } else if (visual.indexOf("triple") !== -1 && isIphone) {
+          cameraTag.textContent = "Câmera Tripla Pro + LiDAR";
+          designDesc.textContent = modelo.nome + " — Três lentes profissionais + scanner LiDAR inferior direito.";
+          backNote.textContent = "Teste 0.5x, 1x e zoom óptico (3x/5x) para garantir ausência de manchas.";
+          backModuleSvg =
+            '<rect x="15" y="13" width="48" height="48" rx="13" fill="rgba(15,23,42,0.6)" stroke="rgba(255,255,255,0.3)"/>' +
+            '<circle cx="28" cy="26" r="7.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="28" cy="48" r="7.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="49" cy="37" r="7.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="49" cy="21" r="2.3" fill="#fef08a"/>' +
+            '<circle cx="49" cy="53" r="3" fill="#1e293b" stroke="#64748b"/>';
+        } else if (visual === "punch_triple_vert") {
+          cameraTag.textContent = "3 Lentes Individuais Samsung";
+          designDesc.textContent = modelo.nome + " — Lentes verticais individuais sem ilha saliente.";
+          backNote.textContent = "Verifique se a tampa traseira não está soltando nas laterais.";
+          backModuleSvg =
+            '<circle cx="26" cy="24" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="26" cy="42" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="26" cy="60" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="40" cy="33" r="2.3" fill="#fef08a"/>';
+        } else if (visual === "punch_ultra") {
+          cameraTag.textContent = "Conjunto Ultra + S-Pen";
+          designDesc.textContent = modelo.nome + " — Conjunto quádruplo com zoom periscópico e slot S-Pen.";
+          backNote.textContent = "Retire a S-Pen da base inferior e confirme o reconhecimento na tela.";
+          backModuleSvg =
+            '<circle cx="25" cy="23" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="25" cy="41" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="25" cy="59" r="6.5" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="41" cy="26" r="4.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.2"/>' +
+            '<circle cx="41" cy="41" r="2.2" fill="#fef08a"/>' +
+            '<circle cx="41" cy="55" r="4.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.2"/>';
+        } else {
+          cameraTag.textContent = "Módulo Xiaomi / Poco";
+          designDesc.textContent = modelo.nome + " — Bloco superior de câmeras de alta resolução.";
+          backNote.textContent = "Confira a integridade da lente principal e do carregador turbo.";
+          backModuleSvg =
+            '<rect x="15" y="14" width="80" height="44" rx="10" fill="rgba(9,13,22,0.65)" stroke="rgba(255,255,255,0.2)"/>' +
+            '<circle cx="32" cy="36" r="10" fill="#090d16" stroke="#cbd5e1" stroke-width="1.5"/>' +
+            '<circle cx="60" cy="28" r="6.5" fill="#090d16" stroke="#94a3b8" stroke-width="1.3"/>' +
+            '<circle cx="60" cy="45" r="5" fill="#090d16" stroke="#94a3b8" stroke-width="1.2"/>' +
+            '<circle cx="78" cy="36" r="2.5" fill="#fef08a"/>';
+        }
+
+        const logoCenterSvg = isIphone
+          ? '<circle cx="55" cy="102" r="9" fill="rgba(255,255,255,0.22)"/>'
+          : '<rect x="38" y="152" width="34" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>';
+
+        backContainer.innerHTML =
+          '<svg viewBox="0 0 110 190" class="w-full h-full drop-shadow-sm">' +
+            '<rect x="6" y="4" width="98" height="182" rx="18" fill="' + cor + '" stroke="#475569" stroke-width="2"/>' +
+            backModuleSvg +
+            logoCenterSvg +
+          '</svg>';
+      }
+
+      // =========================================================================
+      // UPLOAD OFFLINE DE FOTOS REAIS DO APARELHO (FILEREADER - SEM REDE)
+      // =========================================================================
+      function carregarFotoReal(event, imgId, placeholderId) {
+        const file = event.target && event.target.files ? event.target.files[0] : null;
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.getElementById(imgId);
+          const ph = document.getElementById(placeholderId);
+          const btnLimpar = document.getElementById("btnLimparFotos");
+          if (img && e.target && e.target.result) {
+            img.src = e.target.result;
+            img.classList.remove("hidden");
+          }
+          if (ph) ph.classList.add("hidden");
+          if (btnLimpar) btnLimpar.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function limparFotosReais() {
+        ["imgRealFrente", "imgRealTraseira"].forEach(function (id) {
+          const img = document.getElementById(id);
+          if (img) {
+            img.src = "";
+            img.classList.add("hidden");
+          }
+        });
+        ["placeholderFrente", "placeholderTraseira"].forEach(function (id) {
+          const ph = document.getElementById(id);
+          if (ph) ph.classList.remove("hidden");
+        });
+        const btnLimpar = document.getElementById("btnLimparFotos");
+        if (btnLimpar) btnLimpar.classList.add("hidden");
+      }
+
+      // =========================================================================
+      // SELEÇÃO DE MARCA / MODELO E EDITOR DE PREÇOS
+      // =========================================================================
+      function getModeloAtual() {
+        const marcaKey = document.getElementById("selectMarca").value || "apple";
+        const categoria = CATALOGO[marcaKey] || CATALOGO.apple;
+        const idx = parseInt(document.getElementById("selectModelo").value, 10) || 0;
+        const modelo = categoria.modelos[idx] || categoria.modelos[0];
+        return { marcaKey: marcaKey, categoria: categoria, idx: idx, modelo: modelo };
+      }
+
+      function onMarcaChange() {
+        const marcaKey = document.getElementById("selectMarca").value || "apple";
+        const categoria = CATALOGO[marcaKey] || CATALOGO.apple;
+        const selectModelo = document.getElementById("selectModelo");
+
+        selectModelo.innerHTML = categoria.modelos.map(function (m, idx) {
+          return '<option value="' + idx + '">' + m.nome + '</option>';
+        }).join("");
+
+        // Seleciona por padrão o iPhone 13 (índice 3) quando Apple estiver selecionada
+        if (marcaKey === "apple" && categoria.modelos[3]) {
+          selectModelo.value = "3";
+        } else {
+          selectModelo.value = "0";
+        }
+
+        const badge = document.getElementById("badgeSistema");
+        if (badge) {
+          badge.textContent = categoria.tipoSistema === "iphone"
+            ? "Sistema: iOS (Apple)"
+            : "Sistema: Android (" + categoria.versaoAtual + ")";
+        }
+
+        const chkTitulo = document.getElementById("checklistTitulo");
+        if (chkTitulo) {
+          chkTitulo.textContent = categoria.tipoSistema === "iphone"
+            ? "Checklist Técnico — Apple iPhone"
+            : "Checklist Técnico — Android (Samsung / Xiaomi)";
+        }
+
+        const sysLabel = document.getElementById("checklistSystemLabel");
+        if (sysLabel) {
+          sysLabel.textContent = categoria.tipoSistema === "iphone" ? "iOS" : "Android";
+        }
+
+        renderChecklistInterativo(categoria.tipoSistema);
+        onModeloChange();
+      }
+
+      function onModeloChange() {
+        const info = getModeloAtual();
+        renderVisualDesign(info.modelo);
+        preencherCamposEditorValores(info.modelo);
+        recalcular();
+      }
+
+      function preencherCamposEditorValores(modelo) {
+        const elName = document.getElementById("editModelName");
+        if (elName) elName.textContent = modelo.nome;
+        const cMin = document.getElementById("editCompraMin");
+        const cMax = document.getElementById("editCompraMax");
+        const cTeto = document.getElementById("editTeto");
+        const rMin = document.getElementById("editRevendaMin");
+        const rMax = document.getElementById("editRevendaMax");
+        if (cMin) cMin.value = modelo.compraMin;
+        if (cMax) cMax.value = modelo.compraMax;
+        if (cTeto) cTeto.value = modelo.teto;
+        if (rMin) rMin.value = modelo.revendaMin;
+        if (rMax) rMax.value = modelo.revendaMax;
+      }
+
+      function toggleEditorValores() {
+        const painel = document.getElementById("painelEditorValores");
+        if (!painel) return;
+        painel.classList.toggle("hidden");
+        if (!painel.classList.contains("hidden")) {
+          const info = getModeloAtual();
+          preencherCamposEditorValores(info.modelo);
+        }
+      }
+
+      function salvarValoresModelo() {
+        const info = getModeloAtual();
+        const cMin = parseFloat(document.getElementById("editCompraMin").value);
+        const cMax = parseFloat(document.getElementById("editCompraMax").value);
+        const teto = parseFloat(document.getElementById("editTeto").value);
+        const rMin = parseFloat(document.getElementById("editRevendaMin").value);
+        const rMax = parseFloat(document.getElementById("editRevendaMax").value);
+
+        if (isNaN(cMin) || isNaN(cMax) || isNaN(teto) || isNaN(rMin) || isNaN(rMax)) {
+          showToast("Preencha todos os 5 valores numéricos corretamente.");
+          return;
+        }
+
+        CATALOGO[info.marcaKey].modelos[info.idx].compraMin = cMin;
+        CATALOGO[info.marcaKey].modelos[info.idx].compraMax = cMax;
+        CATALOGO[info.marcaKey].modelos[info.idx].teto = teto;
+        CATALOGO[info.marcaKey].modelos[info.idx].revendaMin = rMin;
+        CATALOGO[info.marcaKey].modelos[info.idx].revendaMax = rMax;
+
+        persistirDados();
+        recalcular();
+        renderGuiaCompleto();
+        document.getElementById("painelEditorValores").classList.add("hidden");
+        showToast("Valores atualizados e salvos!");
+      }
+
+      function resetarValoresModelo() {
+        const info = getModeloAtual();
+        const orig = DEFAULT_CATALOGO[info.marcaKey].modelos[info.idx];
+        if (!orig) return;
+        CATALOGO[info.marcaKey].modelos[info.idx] = JSON.parse(JSON.stringify(orig));
+        persistirDados();
+        preencherCamposEditorValores(orig);
+        recalcular();
+        renderGuiaCompleto();
+        showToast("Valores originais restaurados!");
+      }
+
+      // =========================================================================
+      // CÁLCULO FINANCEIRO E VEREDITO DE NEGOCIAÇÃO
+      // =========================================================================
+      function recalcular() {
+        const info = getModeloAtual();
+        const categoria = info.categoria;
+        const modelo = info.modelo;
+        const ajusteArm = parseInt(document.getElementById("selectArmazenamento").value, 10) || 0;
+
+        const compraMin = Math.max(200, modelo.compraMin + ajusteArm);
+        const compraMax = Math.max(250, modelo.compraMax + ajusteArm);
+        const tetoBase = Math.max(300, modelo.teto + ajusteArm);
+        const revendaMin = Math.max(400, modelo.revendaMin + ajusteArm);
+        const revendaMax = Math.max(450, modelo.revendaMax + ajusteArm);
+        const revendaMedia = Math.round((revendaMin + revendaMax) / 2);
+
+        document.getElementById("refCompraIdeal").textContent = formatBRL(compraMin) + " – " + formatBRL(compraMax);
+        document.getElementById("refTetoCompra").textContent = formatBRL(tetoBase);
+        document.getElementById("refRevenda").textContent = formatBRL(revendaMin) + " – " + formatBRL(revendaMax);
+        document.getElementById("lojaAlvoLabel").textContent = formatBRL(compraMin) + " – " + formatBRL(compraMax);
+        document.getElementById("refAtualizacao").textContent = modelo.atualizaAte;
+        document.getElementById("refSistemaVersao").textContent = categoria.tipoSistema === "iphone" ? "Suporte oficial iOS" : "Suporte Android/Segurança";
+        document.getElementById("refLiquidez").textContent = modelo.liquidez;
+        document.getElementById("refDicaModelo").textContent = modelo.dica;
+        document.getElementById("refDicaModelo").title = modelo.dica;
+
+        atualizarLinksLojas();
+
+        let totalDescontos = 0;
+        ["chkBateria", "chkPeca", "chkMarcas", "chkAcessorios"].forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el && el.checked) {
+            totalDescontos += parseInt(el.getAttribute("data-desconto"), 10) || 0;
+          }
+        });
+
+        const custoExtra = parseFloat(document.getElementById("inputCustoExtra").value) || 0;
+        const valorPedido = parseFloat(document.getElementById("inputPedido").value) || 0;
+
+        const propostaMax = Math.max(200, tetoBase - totalDescontos);
+        const alvoMinAjustado = Math.max(200, compraMin - totalDescontos);
+        const alvoMaxAjustado = Math.max(200, compraMax - totalDescontos);
+        const lucroNaProposta = revendaMedia - propostaMax - custoExtra;
+
+        document.getElementById("resPropostaMax").textContent = formatBRL(propostaMax);
+        document.getElementById("resLucroProposta").textContent = formatBRL(lucroNaProposta) + " (média líquida)";
+
+        const printTitle = document.getElementById("printDocTitle");
+        if (printTitle) {
+          printTitle.textContent = "Ficha de Avaliação: " + modelo.nome + " (Atualizações até " + modelo.atualizaAte + ")";
+        }
+
+        const boxLucroPedido = document.getElementById("boxLucroPedido");
+        const resLucroPedido = document.getElementById("resLucroPedido");
+        const vereditoBox = document.getElementById("vereditoBox");
+        const vereditoTitulo = document.getElementById("vereditoTitulo");
+        const vereditoTexto = document.getElementById("vereditoTexto");
+
+        if (valorPedido > 0) {
+          boxLucroPedido.classList.remove("hidden");
+          const lucroPedido = revendaMedia - valorPedido - custoExtra - totalDescontos;
+          resLucroPedido.textContent = formatBRL(lucroPedido);
+
+          if (valorPedido <= alvoMaxAjustado) {
+            resLucroPedido.className = "font-bold text-emerald-400";
+            vereditoBox.className = "rounded-xl p-3.5 border text-xs leading-relaxed bg-emerald-50 border-emerald-300 text-emerald-950";
+            vereditoTitulo.textContent = "Excelente Oportunidade! Feche Hoje";
+            vereditoTexto.textContent = "O vendedor pediu " + formatBRL(valorPedido) + ", dentro da faixa ideal (" + formatBRL(alvoMinAjustado) + " a " + formatBRL(alvoMaxAjustado) + "). Lucro líquido estimado de " + formatBRL(lucroPedido) + ".";
+          } else if (valorPedido <= propostaMax) {
+            resLucroPedido.className = "font-bold text-emerald-300";
+            vereditoBox.className = "rounded-xl p-3.5 border text-xs leading-relaxed bg-sky-50 border-sky-300 text-sky-950";
+            vereditoTitulo.textContent = "Bom Negócio (Dentro do Teto)";
+            vereditoTexto.textContent = "O preço está aceitável, mas tente negociar para " + formatBRL(alvoMaxAjustado) + " à vista no Pix para aumentar sua margem.";
+          } else if (valorPedido <= propostaMax + 250) {
+            resLucroPedido.className = "font-bold text-amber-400";
+            vereditoBox.className = "rounded-xl p-3.5 border text-xs leading-relaxed bg-amber-50 border-amber-300 text-amber-950";
+            vereditoTitulo.textContent = "Negociação Necessária (Preço Acima do Teto)";
+            vereditoTexto.textContent = "Não pague " + formatBRL(valorPedido) + ". Use os abatimentos marcados e faça uma contraproposta firme de " + formatBRL(propostaMax) + " à vista no Pix.";
+          } else {
+            resLucroPedido.className = "font-bold text-rose-400";
+            vereditoBox.className = "rounded-xl p-3.5 border text-xs leading-relaxed bg-rose-50 border-rose-300 text-rose-950";
+            vereditoTitulo.textContent = "Não Comprar Neste Valor (Risco de Prejuízo)";
+            vereditoTexto.textContent = "O valor pedido está " + formatBRL(valorPedido - propostaMax) + " acima do teto seguro para revenda. Só vale se o vendedor aceitar baixar para " + formatBRL(propostaMax) + ".";
+          }
+        } else {
+          boxLucroPedido.classList.add("hidden");
+          vereditoBox.className = "rounded-xl p-3.5 border text-xs leading-relaxed bg-slate-50 border-slate-200 text-slate-700";
+          vereditoTitulo.textContent = "Oferta Alvo Sugerida: " + formatBRL(alvoMinAjustado) + " a " + formatBRL(alvoMaxAjustado);
+          vereditoTexto.textContent = "Teto máximo de compra: " + formatBRL(propostaMax) + ". Digite o valor pedido pelo vendedor acima para simular o lucro.";
+        }
+      }
+
+      // =========================================================================
+      // CHECKLIST TÉCNICO INTERATIVO + EDIÇÃO INLINE (SEM PROMPT/ALERT)
+      // =========================================================================
+      function renderChecklistInterativo(tipoSistema) {
+        const container = document.getElementById("checklistContainer");
+        if (!container) return;
+        const itens = CHECKLISTS[tipoSistema] || [];
+        container.innerHTML = "";
+
+        itens.forEach(function (item, idx) {
+          const wrapper = document.createElement("div");
+          wrapper.id = "checklist-item-" + idx;
+          wrapper.className = "flex items-start justify-between gap-2 p-3 rounded-xl border border-slate-200 hover:border-sky-300 hover:bg-sky-50/30 transition";
+          wrapper.innerHTML =
+            '<label class="flex items-start gap-3 flex-1 cursor-pointer select-none">' +
+              '<input type="checkbox" onchange="updateChecklistProgress()" class="chk-tecnico mt-0.5 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 shrink-0">' +
+              '<div class="text-xs leading-relaxed">' +
+                '<strong class="block font-bold text-slate-900">' + item.titulo + '</strong>' +
+                '<span class="text-slate-600">' + item.desc + '</span>' +
+              '</div>' +
+            '</label>' +
+            '<div class="flex items-center gap-1 shrink-0 no-print">' +
+              '<button type="button" onclick="abrirEdicaoInlineChecklist(\'' + tipoSistema + '\', ' + idx + ')" title="Editar item" class="p-1.5 rounded-lg text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition">' +
+                '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>' +
+              '</button>' +
+              '<button type="button" onclick="removerItemChecklist(\'' + tipoSistema + '\', ' + idx + ')" title="Remover item" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">' +
+                '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>' +
+              '</button>' +
+            '</div>';
+          container.appendChild(wrapper);
+        });
+
+        updateChecklistProgress();
+      }
+
+      function abrirEdicaoInlineChecklist(tipoSistema, idx) {
+        const wrapper = document.getElementById("checklist-item-" + idx);
+        const item = CHECKLISTS[tipoSistema][idx];
+        if (!wrapper || !item) return;
+
+        wrapper.className = "p-3 rounded-xl border-2 border-sky-400 bg-sky-50/60 space-y-2";
+        wrapper.innerHTML =
+          '<input type="text" id="inlineTitulo_' + idx + '" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-900">' +
+          '<textarea id="inlineDesc_' + idx + '" rows="2" class="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-800"></textarea>' +
+          '<div class="flex justify-end gap-2">' +
+            '<button type="button" onclick="renderChecklistInterativo(\'' + tipoSistema + '\')" class="px-3 py-1 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-200">Cancelar</button>' +
+            '<button type="button" onclick="salvarEdicaoInlineChecklist(\'' + tipoSistema + '\', ' + idx + ')" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-600 text-white hover:bg-sky-500">Salvar</button>' +
+          '</div>';
+
+        document.getElementById("inlineTitulo_" + idx).value = item.titulo;
+        document.getElementById("inlineDesc_" + idx).value = item.desc;
+      }
+
+      function salvarEdicaoInlineChecklist(tipoSistema, idx) {
+        const novoT = (document.getElementById("inlineTitulo_" + idx).value || "").trim();
+        const novaD = (document.getElementById("inlineDesc_" + idx).value || "").trim();
+        if (!novoT || !novaD) {
+          showToast("Preencha título e descrição do item.");
+          return;
+        }
+        CHECKLISTS[tipoSistema][idx] = { titulo: novoT, desc: novaD };
+        persistirDados();
+        renderChecklistInterativo(tipoSistema);
+        renderGuiaCompleto();
+        showToast("Item do checklist atualizado!");
+      }
+
+      function toggleEditorChecklist() {
+        const painel = document.getElementById("painelEditorChecklist");
+        if (painel) painel.classList.toggle("hidden");
+      }
+
+      function adicionarItemChecklist() {
+        const info = getModeloAtual();
+        const tipo = info.categoria.tipoSistema;
+        const tituloEl = document.getElementById("novoItemTitulo");
+        const descEl = document.getElementById("novoItemDesc");
+        const titulo = (tituloEl.value || "").trim();
+        const desc = (descEl.value || "").trim();
+
+        if (!titulo || !desc) {
+          showToast("Preencha o título e a instrução do novo item.");
+          return;
+        }
+
+        CHECKLISTS[tipo].push({ titulo: titulo, desc: desc });
+        persistirDados();
+        tituloEl.value = "";
+        descEl.value = "";
+        renderChecklistInterativo(tipo);
+        renderGuiaCompleto();
+        showToast("Novo item adicionado ao checklist!");
+      }
+
+      function removerItemChecklist(tipoSistema, idx) {
+        CHECKLISTS[tipoSistema].splice(idx, 1);
+        persistirDados();
+        renderChecklistInterativo(tipoSistema);
+        renderGuiaCompleto();
+        showToast("Item removido do checklist.");
+      }
+
+      function restaurarChecklistPadrao() {
+        const info = getModeloAtual();
+        const tipo = info.categoria.tipoSistema;
+        CHECKLISTS[tipo] = JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS[tipo]));
+        persistirDados();
+        renderChecklistInterativo(tipo);
+        renderGuiaCompleto();
+        showToast("Checklist restaurado para o padrão!");
+      }
+
+      function updateChecklistProgress() {
+        const checkboxes = document.querySelectorAll(".chk-tecnico");
+        const total = checkboxes.length;
+        let marcados = 0;
+        checkboxes.forEach(function (chk) {
+          if (chk.checked) marcados++;
+        });
+
+        const pct = total > 0 ? Math.round((marcados / total) * 100) : 0;
+        const txt = document.getElementById("progressText");
+        const pctEl = document.getElementById("progressPercent");
+        const barEl = document.getElementById("progressBar");
+        if (txt) txt.textContent = marcados + " de " + total + " itens verificados";
+        if (pctEl) pctEl.textContent = pct + "%";
+        if (barEl) barEl.style.width = pct + "%";
+      }
+
+      function resetChecklist() {
+        document.querySelectorAll(".chk-tecnico").forEach(function (chk) {
+          chk.checked = false;
+        });
+        updateChecklistProgress();
+      }
+
+      // =========================================================================
+      // NAVEGAÇÃO ENTRE ABAS E SEÇÕES
+      // =========================================================================
+      function switchTab(tab) {
+        const viewAvaliador = document.getElementById("viewAvaliador");
+        const viewGuia = document.getElementById("viewGuia");
+        const btnAvaliador = document.getElementById("btnTabAvaliador");
+        const btnGuia = document.getElementById("btnTabGuia");
+        const mobAvaliar = document.getElementById("mobNavAvaliar");
+        const mobTabela = document.getElementById("mobNavTabela");
+
+        if (tab === "avaliador") {
+          viewAvaliador.classList.remove("hidden");
+          viewGuia.classList.add("hidden");
+          if (btnAvaliador) btnAvaliador.className = "px-3.5 py-2 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm transition";
+          if (btnGuia) btnGuia.className = "px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-slate-700/70 transition";
+          if (mobAvaliar) mobAvaliar.className = "flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-sky-400";
+          if (mobTabela) mobTabela.className = "flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold hover:text-white";
+        } else {
+          viewAvaliador.classList.add("hidden");
+          viewGuia.classList.remove("hidden");
+          if (btnGuia) btnGuia.className = "px-3.5 py-2 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm transition";
+          if (btnAvaliador) btnAvaliador.className = "px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-slate-700/70 transition";
+          if (mobTabela) mobTabela.className = "flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-sky-400";
+          if (mobAvaliar) mobAvaliar.className = "flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold hover:text-white";
+        }
+      }
+
+      function irParaSecao(sectionId) {
+        switchTab("avaliador");
+        setTimeout(function () {
+          const el = document.getElementById(sectionId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 60);
+      }
+
+      // =========================================================================
+      // COPIAR SCRIPT DE PROPOSTA PARA WHATSAPP / OLX
+      // =========================================================================
+      function copiarMensagemProposta() {
+        const info = getModeloAtual();
+        const propostaTexto = document.getElementById("resPropostaMax").textContent;
+        const motivos = [];
+        if (document.getElementById("chkBateria").checked) motivos.push("a saúde da bateria que já vai precisar de troca");
+        if (document.getElementById("chkPeca").checked) motivos.push("o detalhe da peça já substituída");
+        if (document.getElementById("chkMarcas").checked) motivos.push("as marcas de uso");
+        if (document.getElementById("chkAcessorios").checked) motivos.push("estar sem caixa/acessórios originais");
+
+        const justificativa = motivos.length > 0 ? ("Considerando " + motivos.join(" e ") + ", ") : "";
+        const msg = "Olá, tudo bem? Vi o anúncio do seu " + info.modelo.nome + ". " + justificativa + "se estiver tudo funcionando certinho e com a conta limpa, consigo ir buscar hoje mesmo com você em um shopping e fecho por " + propostaTexto + " à vista no Pix. Consegue fazer nesse valor?";
+
+        const textarea = document.createElement("textarea");
+        textarea.value = msg;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        showToast("Script de oferta copiado para a área de transferência!");
+      }
+
+      // =========================================================================
+      // RENDERIZAÇÃO DO GUIA COMPLETO (TABELAS E CHECKLISTS A4)
+      // =========================================================================
+      function renderGuiaCompleto() {
+        const ulIphone = document.getElementById("staticChecklistIphone");
+        const ulAndroid = document.getElementById("staticChecklistAndroid");
+
+        if (ulIphone) {
+          ulIphone.innerHTML = CHECKLISTS.iphone.map(function (item) {
+            return '<li class="flex items-start gap-2 pb-1.5 border-b border-slate-100 last:border-none">' +
+              '<span class="inline-block w-3.5 h-3.5 border border-slate-800 rounded-sm mt-0.5 shrink-0"></span>' +
+              '<div><strong class="text-slate-900">' + item.titulo + ':</strong> ' + item.desc + '</div>' +
+            '</li>';
+          }).join("");
+        }
+
+        if (ulAndroid) {
+          ulAndroid.innerHTML = CHECKLISTS.android.map(function (item) {
+            return '<li class="flex items-start gap-2 pb-1.5 border-b border-slate-100 last:border-none">' +
+              '<span class="inline-block w-3.5 h-3.5 border border-slate-800 rounded-sm mt-0.5 shrink-0"></span>' +
+              '<div><strong class="text-slate-900">' + item.titulo + ':</strong> ' + item.desc + '</div>' +
+            '</li>';
+          }).join("");
+        }
+
+        const container = document.getElementById("tabelasCompletasContainer");
+        if (!container) return;
+
+        container.innerHTML = Object.keys(CATALOGO).map(function (key, idx) {
+          const cat = CATALOGO[key];
+          const rows = cat.modelos.map(function (m) {
+            const revendaMedia = Math.round((m.revendaMin + m.revendaMax) / 2);
+            const lucro = revendaMedia - m.teto - 40;
+            return '<tr class="border-b border-slate-200 hover:bg-slate-50">' +
+              '<td class="py-2 px-3 font-bold text-slate-900">' + m.nome + '</td>' +
+              '<td class="py-2 px-3 text-center font-semibold text-slate-700">' + m.atualizaAte + '</td>' +
+              '<td class="py-2 px-3 text-right font-bold text-emerald-700">' + formatBRL(m.compraMin) + ' – ' + formatBRL(m.compraMax) + '</td>' +
+              '<td class="py-2 px-3 text-right font-bold text-amber-700">' + formatBRL(m.teto) + '</td>' +
+              '<td class="py-2 px-3 text-right font-semibold text-sky-700">' + formatBRL(m.revendaMin) + ' – ' + formatBRL(m.revendaMax) + '</td>' +
+              '<td class="py-2 px-3 text-right font-bold text-emerald-700">+' + formatBRL(lucro) + '</td>' +
+              '<td class="py-2 px-3 text-xs text-slate-600 hidden sm:table-cell">' + m.dica + '</td>' +
+            '</tr>';
+          }).join("");
+
+          return '<div class="bg-white rounded-2xl border border-slate-200 overflow-hidden card-print ' + (idx > 0 ? 'page-break' : '') + '">' +
+            '<div class="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">' +
+              '<h3 class="text-sm sm:text-base font-bold">' + cat.nome + '</h3>' +
+              '<span class="text-xs text-slate-300">' + cat.versaoAtual + ' • Ref. 128GB</span>' +
+            '</div>' +
+            '<div class="overflow-x-auto">' +
+              '<table class="w-full text-left border-collapse text-xs">' +
+                '<thead>' +
+                  '<tr class="bg-slate-100 text-slate-700 border-b border-slate-300">' +
+                    '<th class="py-2 px-3 font-bold">Modelo (128GB)</th>' +
+                    '<th class="py-2 px-3 font-bold text-center">Atualiza até</th>' +
+                    '<th class="py-2 px-3 font-bold text-right">Compra Ideal (Alvo)</th>' +
+                    '<th class="py-2 px-3 font-bold text-right">Teto Máximo</th>' +
+                    '<th class="py-2 px-3 font-bold text-right">Revenda Estimada</th>' +
+                    '<th class="py-2 px-3 font-bold text-right">Lucro Líq.</th>' +
+                    '<th class="py-2 px-3 font-bold hidden sm:table-cell">Observação de Mercado</th>' +
+                  '</tr>' +
+                '</thead>' +
+                '<tbody>' + rows + '</tbody>' +
+              '</table>' +
+            '</div>' +
+          '</div>';
+        }).join("");
+      }
+
+      // =========================================================================
+      // FUNÇÕES DE IMPRESSÃO
+      // =========================================================================
+      function imprimirFichaAtual() {
+        switchTab("avaliador");
+        const info = getModeloAtual();
+        const printTitle = document.getElementById("printDocTitle");
+        if (printTitle) {
+          printTitle.textContent = "Ficha de Avaliação: " + info.modelo.nome + " (Atualiza até " + info.modelo.atualizaAte + ")";
+        }
+        setTimeout(function () {
+          window.print();
+        }, 120);
+      }
+
+      function imprimirGuiaCompleto() {
+        switchTab("guia");
+        const printTitle = document.getElementById("printDocTitle");
+        if (printTitle) {
+          printTitle.textContent = "Guia Completo de Compra e Revenda — iPhone (12 ao 18) & Android (2026)";
+        }
+        setTimeout(function () {
+          window.print();
+        }, 120);
+      }
+
+      // =========================================================================
+      // EXPOSIÇÃO EXPLÍCITA NO ESCOPO GLOBAL (WINDOW) + INICIALIZAÇÃO SEGURA
+      // =========================================================================
+      window.switchTab = switchTab;
+      window.irParaSecao = irParaSecao;
+      window.onMarcaChange = onMarcaChange;
+      window.onModeloChange = onModeloChange;
+      window.recalcular = recalcular;
+      window.onEstadoChange = onEstadoChange;
+      window.onCidadeChange = onCidadeChange;
+      window.atualizarLinksLojas = atualizarLinksLojas;
+      window.toggleEditorValores = toggleEditorValores;
+      window.salvarValoresModelo = salvarValoresModelo;
+      window.resetarValoresModelo = resetarValoresModelo;
+      window.toggleEditorChecklist = toggleEditorChecklist;
+      window.adicionarItemChecklist = adicionarItemChecklist;
+      window.removerItemChecklist = removerItemChecklist;
+      window.restaurarChecklistPadrao = restaurarChecklistPadrao;
+      window.abrirEdicaoInlineChecklist = abrirEdicaoInlineChecklist;
+      window.salvarEdicaoInlineChecklist = salvarEdicaoInlineChecklist;
+      window.renderChecklistInterativo = renderChecklistInterativo;
+      window.updateChecklistProgress = updateChecklistProgress;
+      window.resetChecklist = resetChecklist;
+      window.copiarMensagemProposta = copiarMensagemProposta;
+      window.carregarFotoReal = carregarFotoReal;
+      window.limparFotosReais = limparFotosReais;
+      window.imprimirFichaAtual = imprimirFichaAtual;
+      window.imprimirGuiaCompleto = imprimirGuiaCompleto;
+
+      function initApp() {
+        initLocalizacao();
+        onMarcaChange();
+        renderGuiaCompleto();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
